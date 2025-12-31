@@ -11,7 +11,7 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Routes, Route, HashRouter } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './lib/AuthContext'
 import AuthPage from './pages/AuthPage'
 import './index.css'
@@ -20,13 +20,13 @@ import BlockBlast from './games/block_blast/BlockBlast'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <AuthProvider>
-      <HashRouter>
+      <BrowserRouter basename="/puppy">
         <Routes>
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/" element={<div className="p-8">홈페이지 (작업중)</div>} />
           <Route path="/games/block-blast" element={<BlockBlast />} />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </AuthProvider>
   </React.StrictMode>,
 )
