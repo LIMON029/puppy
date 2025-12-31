@@ -36,7 +36,9 @@ jobs:
         run: npm ci # npm install 보다 엄격하고 빠른 설치 방식 권장
         
       - name: Build
-        run: npm run build
+        run:
+          npm run build
+          cp dist/index.html dist/404.html
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_KEY: ${{ secrets.VITE_SUPABASE_KEY }}
