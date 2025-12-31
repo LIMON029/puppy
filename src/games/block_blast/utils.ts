@@ -1,4 +1,4 @@
-import type { Board, Cell, BlockShape, Position } from './types'
+import type { Board, BlockShape, Position } from './types'
 
 // 빈 보드 생성
 export const createEmptyBoard = (): Board => {

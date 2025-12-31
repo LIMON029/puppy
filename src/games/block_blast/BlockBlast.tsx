@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef } from 'react'
+// useEffect
 import { DndContext, DragOverlay, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
 import type {DragStartEvent, DragEndEvent} from '@dnd-kit/core'
 import Board from './Board'
@@ -25,10 +26,9 @@ export default function BlockBlast() {
     gameOver: false
   })
   const [draggedBlock, setDraggedBlock] = useState<BlockShape | null>(null)
-  const [dropPosition, setDropPosition] = useState<Position | null>(null)
+  const [_, setDropPosition] = useState<Position | null>(null)
   const dropPositionRef = useRef<Position | null>(null) // 추가
-  const [highScore, setHighScore] = useState<number>(0)
-
+  // const [highScore, setHighScore] = useState<number>(0)
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
