@@ -3,26 +3,38 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
+  # 수동으로도 배포를 실행할 수 있도록 설정 추가
+  workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# 동시에 여러 배포가 진행될 경우, 이전 배포를 취소하여 충돌 방지
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm' # npm 캐시를 사용하여 속도 향상
           
       - name: Install dependencies
-        run: npm install
+        run: npm ci # npm install 보다 엄격하고 빠른 설치 방식 권장
         
       - name: Build
         env:
@@ -41,25 +53,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-# Logs
-logs
-*.log
-npm-debug.log*
-
-# Dependency directories
-node_modules/
-
-# Build
-dist/
-dist-ssr/
-
-# Environment variables
-.env
-.env.local
-.env.production
-
-# Editor
-.vscode/*
-!.vscode/extensions.json
-.idea
