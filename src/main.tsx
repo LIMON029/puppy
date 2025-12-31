@@ -20,7 +20,7 @@ import BlockBlast from './games/block_blast/BlockBlast'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/puppy">
         <Routes>
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/" element={<div className="p-8">홈페이지 (작업중)</div>} />
