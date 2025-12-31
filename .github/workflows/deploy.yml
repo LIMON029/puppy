@@ -36,10 +36,11 @@ jobs:
         run: npm ci # npm install 보다 엄격하고 빠른 설치 방식 권장
         
       - name: Build
+        run: npm run build
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_KEY: ${{ secrets.VITE_SUPABASE_KEY }}
-        run: npm run build
+        
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
